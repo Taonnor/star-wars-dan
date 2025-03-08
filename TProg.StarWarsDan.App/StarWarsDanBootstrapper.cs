@@ -32,48 +32,63 @@ internal sealed class StarWarsDanBootstrapper : BootstrapperBase
     /// <inheritdoc cref="BootstrapperBase.OnStarted"/>
     protected override void OnStarted()
     {
-        // Show Splash Screen
-        this.splashScreenService = this.GetExportedValue<ISplashScreenService>() ??
-            throw new NullReferenceException("The import of ISplashScreenService is null");
-        this.splashScreenService.ShowSplashScreen();
-
-        // Initialize application resources
-        // The process is performance intensive
-        IApplicationResourceService? applicationResourceService = this.GetExportedValue<IApplicationResourceService>() ??
-            throw new NullReferenceException("The import of IApplicationResourceService is null");
-        applicationResourceService.CreateApplicationResources();
-
-        // Entry Point for MEF chain
-        MainScreenViewModel? mainScreenViewModel = this.GetExportedValue<MainScreenViewModel>() ??
-            throw new NullReferenceException("The import of IMainScreenViewModel is null");
-
-        // Data context for main window
-        this.mainWindowViewModel = new MainWindowContext(mainScreenViewModel, "StarWarsDan");
-        this.mainWindowViewModel.RequestClosingApplication += this.CloseApplication;
-
-        // The main window shows the main screen. The window works as container.
-        this.mainWindowView = new MainWindow
+        try
         {
-            DataContext = this.mainWindowViewModel
-        };
+            // Show Splash Screen
+            this.splashScreenService = this.GetExportedValue<ISplashScreenService>() ??
+                throw new NullReferenceException("The import of ISplashScreenService is null");
+            this.splashScreenService.ShowSplashScreen();
 
-        this.mainWindowView.ContentRendered += this.MainWindowView_ContentRendered;
-        this.mainWindowView.Show();
+            // Initialize application resources
+            // The process is performance intensive
+            IApplicationResourceService? applicationResourceService = this.GetExportedValue<IApplicationResourceService>() ??
+                throw new NullReferenceException("The import of IApplicationResourceService is null");
+            applicationResourceService.CreateApplicationResources();
+
+            // Entry Point for MEF chain
+            MainScreenViewModel? mainScreenViewModel = this.GetExportedValue<MainScreenViewModel>() ??
+                throw new NullReferenceException("The import of IMainScreenViewModel is null");
+
+            // Data context for main window
+            this.mainWindowViewModel = new MainWindowContext(mainScreenViewModel, "StarWarsDan");
+            this.mainWindowViewModel.RequestClosingApplication += this.CloseApplication;
+
+            // The main window shows the main screen. The window works as container.
+            this.mainWindowView = new MainWindow
+            {
+                DataContext = this.mainWindowViewModel
+            };
+
+            this.mainWindowView.ContentRendered += this.MainWindowView_ContentRendered;
+            this.mainWindowView.Show();
+        }
+        catch (Exception ex)
+        {
+            _ = MessageBox.Show($"An error occurred while starting the application: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Application.Current.Shutdown(-1);
+        }
     }
 
     /// <inheritdoc cref="BootstrapperBase.OnStarted"/>
     protected override void OnStopped()
     {
-        if (this.mainWindowView != null)
+        try
         {
-            this.mainWindowView.ContentRendered -= this.MainWindowView_ContentRendered;
-            this.mainWindowView.Hide();
-        }
+            if (this.mainWindowView != null)
+            {
+                this.mainWindowView.ContentRendered -= this.MainWindowView_ContentRendered;
+                this.mainWindowView.Hide();
+            }
 
-        if (this.mainWindowViewModel != null)
+            if (this.mainWindowViewModel != null)
+            {
+                this.mainWindowViewModel.RequestClosingApplication -= this.CloseApplication;
+                this.mainWindowViewModel.Dispose();
+            }
+        }
+        catch (Exception ex)
         {
-            this.mainWindowViewModel.RequestClosingApplication -= this.CloseApplication;
-            this.mainWindowViewModel.Dispose();
+            _ = MessageBox.Show($"An error occurred while stopping the application: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
@@ -89,18 +104,21 @@ internal sealed class StarWarsDanBootstrapper : BootstrapperBase
     /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
     private void MainWindowView_ContentRendered(object? sender, EventArgs e)
     {
-        if (this.mainWindowView != null)
+        try
         {
-            this.mainWindowView.ContentRendered -= this.MainWindowView_ContentRendered;
-
-            this.splashScreenService?.CloseSplashScreen();
-
-            bool? activated = this.mainWindowView?.Activate();
-
-            if (!activated ?? true)
+            if (this.mainWindowView != null)
             {
-                throw new InvalidOperationException("Application main window not activated.");
+                this.mainWindowView.ContentRendered -= this.MainWindowView_ContentRendered;
+
+                this.splashScreenService?.CloseSplashScreen();
+
+                _ = this.mainWindowView.Activate();
             }
+        }
+        catch (Exception ex)
+        {
+            _ = MessageBox.Show($"An error occurred while rendering the main window content: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            Application.Current.Shutdown(-1);
         }
     }
 }

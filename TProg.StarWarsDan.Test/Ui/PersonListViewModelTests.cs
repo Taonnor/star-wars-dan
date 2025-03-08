@@ -22,6 +22,9 @@ public class PersonListViewModelTests
         this.viewModel = new PersonListViewModel(this.mockPersonProvider.Object, this.mockDialogService.Object);
     }
 
+    [TearDown]
+    public void TearDown() => this.viewModel.Dispose();
+
     [Test]
     public void Persons_SetAndGet_ReturnsCorrectValue()
     {

@@ -27,4 +27,7 @@ public class MainScreenViewModelTests
         this.viewModel.Dispose();
         this.mockPersonListViewModel.Verify(m => m.Dispose(), Times.Once);
     }
+
+    [TearDown]
+    public void TearDown() => this.viewModel.Dispose();
 }
