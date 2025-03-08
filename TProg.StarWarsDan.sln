@@ -5,6 +5,14 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.App", "TProg.StarWarsDan.App\TProg.StarWarsDan.App.csproj", "{4651AB18-66B6-410D-98F6-ED5F23F41F0C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Ui", "TProg.StarWarsDan.Ui\TProg.StarWarsDan.Ui.csproj", "{FE304D09-2338-4E98-8D90-C57980B849E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Domain", "TProg.StarWarsDan.Domain\TProg.StarWarsDan.Domain.csproj", "{67378E9D-A7C9-4053-8DCE-14F97F541325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Data.Api", "TProg.StarWarsDan.Data.Api\TProg.StarWarsDan.Data.Api.csproj", "{4F7DBE41-162C-404D-9BA6-31D4F6D9E4A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Data.Swapi", "TProg.StarWarsDan.Data.Swapi\TProg.StarWarsDan.Data.Swapi.csproj", "{3B568166-C4E6-4751-8E75-8748F8C270F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +23,22 @@ Global
 		{4651AB18-66B6-410D-98F6-ED5F23F41F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4651AB18-66B6-410D-98F6-ED5F23F41F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4651AB18-66B6-410D-98F6-ED5F23F41F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE304D09-2338-4E98-8D90-C57980B849E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE304D09-2338-4E98-8D90-C57980B849E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE304D09-2338-4E98-8D90-C57980B849E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE304D09-2338-4E98-8D90-C57980B849E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67378E9D-A7C9-4053-8DCE-14F97F541325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67378E9D-A7C9-4053-8DCE-14F97F541325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67378E9D-A7C9-4053-8DCE-14F97F541325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67378E9D-A7C9-4053-8DCE-14F97F541325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F7DBE41-162C-404D-9BA6-31D4F6D9E4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7DBE41-162C-404D-9BA6-31D4F6D9E4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7DBE41-162C-404D-9BA6-31D4F6D9E4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7DBE41-162C-404D-9BA6-31D4F6D9E4A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

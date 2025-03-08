@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="TProg.StarWarsDan.Ui.Views.EditPersonDialogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:domain="clr-namespace:TProg.StarWarsDan.Domain;assembly=TProg.StarWarsDan.Domain"
+             xmlns:local="clr-namespace:TProg.StarWarsDan.Ui.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:viewModels="clr-namespace:TProg.StarWarsDan.Ui.ViewModels"
+             d:DataContext="{d:DesignInstance viewModels:EditPersonDialogViewModel,
+                                              IsDesignTimeCreatable=False}"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <d:ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="/TProg.Framework.Style;component/Assets/Colors.xaml" />
+        </d:ResourceDictionary.MergedDictionaries>
+
+        <ObjectDataProvider x:Key="GenderEnumValues"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="domain:Gender" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <DataTemplate x:Key="GenderTemplate">
+            <TextBlock Foreground="{StaticResource TProg.Colors.NormalBackground}" Text="{Binding}" />
+        </DataTemplate>
+        
+    </UserControl.Resources>
+
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,16,0">
+            <TextBlock Height="24" Text="Name" />
+            <TextBlock Height="24" Text="Height" />
+            <TextBlock Height="24" Text="Mass" />
+            <TextBlock Height="24" Text="Birth Year" />
+            <TextBlock Height="24" Text="Gender" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBlock Height="24" Text="{Binding EditedPerson.Name}" />
+            <TextBox Height="24" Text="{Binding PersonHeight}" />
+            <TextBlock Height="24" Text="{Binding EditedPerson.Mass}" />
+            <TextBox Height="24" Text="{Binding BirthYear}" />
+            <ComboBox Height="24" ItemTemplate="{StaticResource GenderTemplate}"
+                      ItemsSource="{Binding Source={StaticResource GenderEnumValues}}"
+                      SelectedItem="{Binding Gender}" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>
