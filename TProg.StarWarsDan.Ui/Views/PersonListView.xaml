@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="TProg.StarWarsDan.Ui.Views.PersonListView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Interactivity="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:TProg.StarWarsDan.Ui.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -29,7 +30,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Margin="8" Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="0"
+                    Margin="8"
+                    Orientation="Horizontal">
             <TextBlock Margin="0,0,16,0" Text="{Binding AveragePersonSizes, StringFormat=Average Person Size: {0}}" />
             <TextBlock Margin="0,0,16,0" Text="{Binding AveragePersonBirthYears, StringFormat=Average Person Birth Years: {0}}" />
             <TextBlock Text="{Binding MaleFemaleRatio, StringFormat=Male / Female Ratio: {0}}" />
@@ -39,6 +42,13 @@
                   ItemTemplate="{StaticResource PersonTemplate}"
                   ItemsSource="{Binding Persons}"
                   SelectedItem="{Binding SelectedPerson}"
-                  Style="{StaticResource StarWarsListView}" />
+                  Style="{StaticResource StarWarsListView}">
+
+            <Interactivity:Interaction.Triggers>
+                <Interactivity:EventTrigger EventName="MouseDoubleClick">
+                    <Interactivity:InvokeCommandAction Command="{Binding ShowDialogCommand}" />
+                </Interactivity:EventTrigger>
+            </Interactivity:Interaction.Triggers>
+        </ListView>
     </Grid>
 </UserControl>

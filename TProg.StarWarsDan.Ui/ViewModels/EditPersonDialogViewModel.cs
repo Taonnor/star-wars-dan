@@ -3,27 +3,50 @@ using TProg.StarWarsDan.Domain;
 
 namespace TProg.StarWarsDan.Ui.ViewModels;
 
+/// <summary>
+/// ViewModel for the edit person dialog.
+/// </summary>
 internal sealed class EditPersonDialogViewModel : DialogViewModelBase
 {
-    private double personHeight;
-    private int birthYear;
+    private double? personHeight;
+    private string? birthYear;
     private Gender gender;
+    private Person? editedPerson;
 
-    public EditPersonDialogViewModel(Person? editedPerson) : base("EditPersonDialogView")
+    /// <summary>
+    /// Initializes a new instance of the <see cref="EditPersonDialogViewModel"/> class.
+    /// </summary>
+    /// <param name="editedPerson">The person to be edited.</param>
+    public EditPersonDialogViewModel() : base("Edit selected Person")
     {
-        this.EditedPerson = editedPerson;
+    }
 
-        if (editedPerson is not null)
+    /// <summary>
+    /// Gets or sets the person to be edited.
+    /// </summary>
+    public Person? EditedPerson
+    {
+        get => this.editedPerson;
+        set
         {
-            this.PersonHeight = editedPerson.Height;
-            this.BirthYear = editedPerson.BirthYear;
-            this.Gender = editedPerson.Gender;
+            if (value != this.editedPerson)
+            {
+                this.editedPerson = value;
+
+                if (this.editedPerson is not null)
+                {
+                    this.PersonHeight = this.editedPerson.Height;
+                    this.BirthYear = this.editedPerson.BirthYear;
+                    this.Gender = this.editedPerson.Gender;
+                }
+            }
         }
     }
 
-    public Person? EditedPerson { get; }
-
-    public double PersonHeight
+    /// <summary>
+    /// Gets or sets the height of the person.
+    /// </summary>
+    public double? PersonHeight
     {
         get => this.personHeight;
         set
@@ -36,7 +59,10 @@ internal sealed class EditPersonDialogViewModel : DialogViewModelBase
         }
     }
 
-    public int BirthYear
+    /// <summary>
+    /// Gets or sets the birth year of the person.
+    /// </summary>
+    public string? BirthYear
     {
         get => this.birthYear;
         set
@@ -49,6 +75,9 @@ internal sealed class EditPersonDialogViewModel : DialogViewModelBase
         }
     }
 
+    /// <summary>
+    /// Gets or sets the gender of the person.
+    /// </summary>
     public Gender Gender
     {
         get => this.gender;

@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
     <PackageReference Include="TProg.Framework.Core" Version="1.0.2" />
-    <PackageReference Include="TProg.Framework.Mvvm" Version="1.0.2" />
+    <PackageReference Include="TProg.Framework.Mvvm" Version="1.0.3" />
     <PackageReference Include="TProg.Framework.Style" Version="1.0.2" />
     <PackageReference Include="TProg.Framework.Wpf" Version="1.0.2" />
   </ItemGroup>
@@ -20,6 +20,12 @@
     <ProjectReference Include="..\TProg.StarWarsDan.Data.Api\TProg.StarWarsDan.Data.Api.csproj" />
     <ProjectReference Include="..\TProg.StarWarsDan.Data.Swapi\TProg.StarWarsDan.Data.Swapi.csproj" />
     <ProjectReference Include="..\TProg.StarWarsDan.Ui\TProg.StarWarsDan.Ui.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>TProg.StarWarsDan.Test</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

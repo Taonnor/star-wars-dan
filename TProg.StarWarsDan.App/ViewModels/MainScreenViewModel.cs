@@ -1,9 +1,4 @@
-﻿// <copyright file="MainScreenViewModel.cs" company="TProg">
-//       2022 All rights reserved.
-// </copyright>
-
-using System.ComponentModel.Composition;
-using System.Diagnostics;
+﻿using System.ComponentModel.Composition;
 
 using TProg.Framework.Mvvm.Api;
 using TProg.StarWarsDan.Ui.Api;
@@ -14,26 +9,20 @@ namespace TProg.StarWarsDan.App.ViewModels;
 /// Represents the the view model for main screen
 /// </summary>
 /// <seealso cref="ViewModelBase" />
+/// <remarks>
+/// Initializes a new instance of the <see cref="MainScreenViewModel" /> class.
+/// </remarks>
+/// <param name="personListViewModel">The person list view model.</param>
 [Export(typeof(MainScreenViewModel))]
-internal sealed class MainScreenViewModel : ViewModelBase
+[method: ImportingConstructor]
+internal sealed class MainScreenViewModel(IPersonListViewModel personListViewModel) : ViewModelBase
 {
     private bool disposed;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="MainScreenViewModel" /> class.
+    /// Gets the person list view model.
     /// </summary>
-    [ImportingConstructor]
-    public MainScreenViewModel(IPersonListViewModel personListViewModel)
-    {
-        this.PersonListViewModel = personListViewModel;
-    }
-
-    public IPersonListViewModel PersonListViewModel { get; }
-
-    /// <summary>
-    /// Gets a value indicating whether this instance is debug.
-    /// </summary>
-    public bool IsDebug => Debugger.IsAttached;
+    public IPersonListViewModel PersonListViewModel { get; } = personListViewModel;
 
     /// <summary>
     /// Releases unmanaged and - optionally - managed resources.

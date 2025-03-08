@@ -12,10 +12,7 @@ public partial class App : Application
     /// <summary>
     ///     Initializes a new instance of the <see cref="App" /> class.
     /// </summary>
-    public App()
-    {
-        this.bootstrapper = new StarWarsDanBootstrapper();
-    }
+    public App() => this.bootstrapper = new StarWarsDanBootstrapper();
 
     /// <summary>
     ///     Raises the <see cref="E:System.Windows.Application.Exit" /> event.

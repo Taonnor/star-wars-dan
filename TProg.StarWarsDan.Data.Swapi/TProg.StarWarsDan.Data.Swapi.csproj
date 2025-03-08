@@ -14,4 +14,10 @@
     <ProjectReference Include="..\TProg.StarWarsDan.Data.Api\TProg.StarWarsDan.Data.Api.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>TProg.StarWarsDan.Test</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>

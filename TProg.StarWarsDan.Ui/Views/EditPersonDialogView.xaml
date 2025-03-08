@@ -26,7 +26,7 @@
         <DataTemplate x:Key="GenderTemplate">
             <TextBlock Foreground="{StaticResource TProg.Colors.NormalBackground}" Text="{Binding}" />
         </DataTemplate>
-        
+
     </UserControl.Resources>
 
     <Grid Margin="16">
@@ -35,7 +35,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,0,16,0">
+        <StackPanel Grid.Column="0"
+                    Margin="0,0,16,0"
+                    Orientation="Vertical">
             <TextBlock Height="24" Text="Name" />
             <TextBlock Height="24" Text="Height" />
             <TextBlock Height="24" Text="Mass" />
@@ -48,7 +50,8 @@
             <TextBox Height="24" Text="{Binding PersonHeight}" />
             <TextBlock Height="24" Text="{Binding EditedPerson.Mass}" />
             <TextBox Height="24" Text="{Binding BirthYear}" />
-            <ComboBox Height="24" ItemTemplate="{StaticResource GenderTemplate}"
+            <ComboBox Height="24"
+                      ItemTemplate="{StaticResource GenderTemplate}"
                       ItemsSource="{Binding Source={StaticResource GenderEnumValues}}"
                       SelectedItem="{Binding Gender}" />
         </StackPanel>

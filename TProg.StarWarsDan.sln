@@ -13,6 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Data.Api"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Data.Swapi", "TProg.StarWarsDan.Data.Swapi\TProg.StarWarsDan.Data.Swapi.csproj", "{3B568166-C4E6-4751-8E75-8748F8C270F3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TProg.StarWarsDan.Test", "TProg.StarWarsDan.Test\TProg.StarWarsDan.Test.csproj", "{88DBA5E0-9E34-4A4E-89B4-6DD64FDA4BF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +48,10 @@ Global
 		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B568166-C4E6-4751-8E75-8748F8C270F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88DBA5E0-9E34-4A4E-89B4-6DD64FDA4BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88DBA5E0-9E34-4A4E-89B4-6DD64FDA4BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88DBA5E0-9E34-4A4E-89B4-6DD64FDA4BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88DBA5E0-9E34-4A4E-89B4-6DD64FDA4BF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

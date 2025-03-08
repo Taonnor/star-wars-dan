@@ -80,10 +80,7 @@ internal sealed class StarWarsDanBootstrapper : BootstrapperBase
     /// <summary>
     /// Closes the application.
     /// </summary>
-    private void CloseApplication()
-    {
-        Application.Current.Shutdown(0);
-    }
+    private void CloseApplication() => Application.Current.Shutdown(0);
 
     /// <summary>
     /// Handles the <see cref="Window.ContentRendered"/> event of the MainWindowView.

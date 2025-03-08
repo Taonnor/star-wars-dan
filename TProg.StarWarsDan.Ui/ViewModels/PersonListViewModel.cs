@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 
 using TProg.Framework.Mvvm.Api;
+using TProg.Framework.Mvvm.Api.Commands;
 using TProg.Framework.Mvvm.Api.Dialogs;
 using TProg.StarWarsDan.Data.Api;
 using TProg.StarWarsDan.Domain;
@@ -8,6 +9,9 @@ using TProg.StarWarsDan.Ui.Api;
 
 namespace TProg.StarWarsDan.Ui.ViewModels;
 
+/// <summary>
+/// Represents the ViewModel for the list of persons.
+/// </summary>
 [Export(typeof(IPersonListViewModel))]
 internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
 {
@@ -18,19 +22,50 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
     private double averagePersonSizes;
     private double averagePersonBirthYears;
     private string? maleFemaleRatio;
+    private List<Person> persons = [];
+    private readonly EditPersonDialogViewModel editPersonDialogViewModel = new();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PersonListViewModel"/> class.
+    /// </summary>
+    /// <param name="personProvider">The provider for person data.</param>
+    /// <param name="dialogService">The service for dialogs.</param>
     [ImportingConstructor]
     public PersonListViewModel(IPersonProvider personProvider, IDialogService dialogService)
     {
         this.personProvider = personProvider;
         this.personProvider.PersonsChanged += this.OnPersonsChanged;
-        this.UpdatePersonCalculations();
+        this.OnPersonsChanged();
 
         this.dialogService = dialogService;
     }
 
-    public IEnumerable<Person> Persons => this.personProvider.Persons;
+    /// <summary>
+    /// Gets the command to show the edit person dialog.
+    /// </summary>
+    public ShowModalDialogUiCommand ShowDialogCommand => new(this.editPersonDialogViewModel, this.OnDialogResult);
 
+    /// <summary>
+    /// Gets or sets the list of persons.
+    /// </summary>
+    public List<Person> Persons
+    {
+        get => this.persons;
+        set
+        {
+            if (value != this.persons)
+            {
+                this.persons = value;
+                this.OnPropertyChanged();
+
+                this.UpdatePersonCalculations();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the selected person.
+    /// </summary>
     public Person? SelectedPerson
     {
         get => this.selectedPerson;
@@ -39,13 +74,17 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
             if (this.selectedPerson != value)
             {
                 this.selectedPerson = value;
+                this.editPersonDialogViewModel.EditedPerson = this.selectedPerson;
+
                 this.OnPropertyChanged();
 
-                this.OpenDetailsToSelectedPersonAsync();
             }
         }
     }
 
+    /// <summary>
+    /// Gets the average height of the persons.
+    /// </summary>
     public double AveragePersonSizes
     {
         get => this.averagePersonSizes;
@@ -59,6 +98,9 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
         }
     }
 
+    /// <summary>
+    /// Gets the average birth year of the persons.
+    /// </summary>
     public double AveragePersonBirthYears
     {
         get => this.averagePersonBirthYears;
@@ -72,6 +114,9 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
         }
     }
 
+    /// <summary>
+    /// Gets the ratio of male to female persons.
+    /// </summary>
     public string? MaleFemaleRatio
     {
         get => this.maleFemaleRatio;
@@ -85,6 +130,10 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
         }
     }
 
+    /// <summary>
+    /// Releases the resources used by the <see cref="PersonListViewModel"/> class.
+    /// </summary>
+    /// <param name="disposing">A value indicating whether managed resources should be released.</param>
     protected override void Dispose(bool disposing)
     {
         if (!this.disposed)
@@ -92,6 +141,7 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
             if (disposing)
             {
                 this.personProvider.PersonsChanged -= this.OnPersonsChanged;
+                this.editPersonDialogViewModel.Dispose();
             }
 
             this.disposed = true;
@@ -111,29 +161,35 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
         return a;
     }
 
-    private async void OpenDetailsToSelectedPersonAsync()
+    private void OnDialogResult(DialogResult dialogResult)
     {
-        EditPersonDialogViewModel editPersonDialogViewModel = new(this.SelectedPerson);
-
-        DialogResult dialogResult = await this.dialogService.ShowModalDialog(editPersonDialogViewModel);
-
-        if (dialogResult == DialogResult.Accepted && this.SelectedPerson != null)
+        if (this.SelectedPerson == null)
         {
-            this.SelectedPerson.Height = editPersonDialogViewModel.PersonHeight;
-            this.SelectedPerson.BirthYear = editPersonDialogViewModel.BirthYear;
-            this.SelectedPerson.Gender = editPersonDialogViewModel.Gender;
+            return;
         }
 
-        this.UpdatePersonCalculations();
+        if (dialogResult == DialogResult.Accepted)
+        {
+            this.SelectedPerson.Height = this.editPersonDialogViewModel.PersonHeight ?? 0;
+            this.SelectedPerson.BirthYear = this.editPersonDialogViewModel.BirthYear ?? string.Empty;
+            this.SelectedPerson.Gender = this.editPersonDialogViewModel.Gender;
 
-        editPersonDialogViewModel.Dispose();
+            this.UpdatePersonCalculations();
+        }
     }
 
     private void UpdatePersonCalculations()
     {
-        this.AveragePersonSizes = this.Persons.Average(p => p.Height);
-        this.AveragePersonBirthYears = this.Persons.Average(p => p.BirthYear);
-        this.MaleFemaleRatio = this.CalculateMaleFemaleRatio();
+        if (this.Persons.Count != 0)
+        {
+            this.AveragePersonSizes = this.Persons.Average(p => p.Height);
+
+            IEnumerable<double> validBirthYears = this.Persons
+                .Where(p => p.BirthYear != "unknown")
+                .Select(p => double.Parse(p.BirthYear.Replace("BBY", "")));
+            this.AveragePersonBirthYears = validBirthYears.Any() ? validBirthYears.Average() : 0;
+            this.MaleFemaleRatio = this.CalculateMaleFemaleRatio();
+        }
     }
 
     private string CalculateMaleFemaleRatio()
@@ -146,12 +202,8 @@ internal sealed class PersonListViewModel : ViewModelBase, IPersonListViewModel
         maleCount /= gcd;
         femaleCount /= gcd;
 
-        return $"{maleCount}:{femaleCount}";
+        return $"{femaleCount}:{maleCount}";
     }
 
-    private void OnPersonsChanged()
-    {
-        this.OnPropertyChanged(nameof(this.Persons));
-        this.UpdatePersonCalculations();
-    }
+    private void OnPersonsChanged() => this.Persons = [.. this.personProvider.Persons];
 }

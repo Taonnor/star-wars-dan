@@ -8,8 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="System.ComponentModel.Composition" Version="9.0.2" />
-    <PackageReference Include="TProg.Framework.Mvvm" Version="1.0.2" />
+    <PackageReference Include="TProg.Framework.Mvvm" Version="1.0.3" />
     <PackageReference Include="TProg.Framework.Style" Version="1.0.2" />
     <PackageReference Include="TProg.Framework.Wpf" Version="1.0.2" />
   </ItemGroup>
@@ -17,6 +18,12 @@
   <ItemGroup>
     <ProjectReference Include="..\TProg.StarWarsDan.Data.Api\TProg.StarWarsDan.Data.Api.csproj" />
     <ProjectReference Include="..\TProg.StarWarsDan.Domain\TProg.StarWarsDan.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>TProg.StarWarsDan.Test</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

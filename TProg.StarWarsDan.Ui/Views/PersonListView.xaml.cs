@@ -1,28 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
-namespace TProg.StarWarsDan.Ui.Views
+namespace TProg.StarWarsDan.Ui.Views;
+
+/// <summary>
+/// Interaction logic for PersonListView.xaml
+/// </summary>
+public partial class PersonListView : UserControl
 {
     /// <summary>
-    /// Interaktionslogik für PersonListView.xaml
+    /// Initializes a new instance of the <see cref="PersonListView"/> class.
     /// </summary>
-    public partial class PersonListView : UserControl
-    {
-        public PersonListView()
-        {
-            InitializeComponent();
-        }
-    }
+    public PersonListView() => this.InitializeComponent();
 }
