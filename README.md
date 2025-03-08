@@ -11,3 +11,8 @@ AK: Beim Klick auf eine Person wird ein modaler Dialog mit den folgenden Daten a
 
 - Für den Austausch der API muss lediglich das Projekt TProg.StarWarsDan.Data.Swapi ausgetauscht werden gegen beispielsweise eine DB Implementierung.
 - Für die Umsetzung des CLienten habe ich mein privates Framework verwendet. Bei Bedarf kann ich die Inhalte des Frameworks ebenfalls erläutern.
+
+# Hinweise zum starten der Applikation ohne Visual Studio
+
+- .NET Desktop Runtime 9.0.2 herunterladen & installieren (https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
+- Applikation mit Adminrechten starten
