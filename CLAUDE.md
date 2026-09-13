@@ -45,4 +45,4 @@ neben diesem Repo auf der Festplatte.
 
 ## Ausführen ohne Visual Studio
 
-.NET Desktop Runtime 9.0.2 installieren, siehe README.md für Details.
+.NET Desktop Runtime 10.0 installieren, siehe README.md für Details.
