@@ -1,0 +1,11 @@
+# Dieses Repo speichert Textdateien mit CRLF - genau so, wie sie im
+# Arbeitsverzeichnis liegen.
+#
+# Ohne diese Vorgabe normalisiert Git jede angefasste Textdatei beim Einchecken
+# auf LF, sobald core.autocrlf=true gesetzt ist (unter Windows der Normalfall).
+# Weil die gespeicherten Dateien CRLF tragen, gilt dann die komplette Datei als
+# geaendert statt nur der wirklich geaenderten Zeilen - und jedes Review wird
+# unbrauchbar.
+#
+# -text schaltet diese Umwandlung ab: Git legt die Bytes so ab, wie sie sind.
+* -text
