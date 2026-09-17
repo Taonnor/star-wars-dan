@@ -1,3 +1,5 @@
+[![.NET Desktop](https://github.com/Taonnor/star-wars-dan/actions/workflows/dotnet-desktop.yml/badge.svg)](https://github.com/Taonnor/star-wars-dan/actions/workflows/dotnet-desktop.yml)
+
 # Abweichungen von der Spezifikation
 
 AK: Beim Klick auf eine Person wird ein modaler Dialog mit den folgenden Daten angezeigt.
