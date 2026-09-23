@@ -3,10 +3,8 @@
   <PropertyGroup>
     <!--
       The single place where the .NET version of this repository is defined. Every project derives
-      its TargetFramework from it: the platform independent projects use it as is, the Windows
-      projects append "-windows". The name is the same as in tprog-framework, and so is the rule:
-      all repositories of the workspace stand on the same long-term-support version, and a move is
-      a one-line change here.
+      its TargetFramework from it and appends its platform suffix where it has one. The name is the
+      same as in tprog-framework; which version it holds follows the workspace rule.
     -->
     <TProgDotNetVersion>net10.0</TProgDotNetVersion>
   </PropertyGroup>
