@@ -1,0 +1,12 @@
+<Project>
+
+  <PropertyGroup>
+    <!--
+      The single place where the .NET version of this repository is defined. Every project derives
+      its TargetFramework from it and appends its platform suffix where it has one. The name is the
+      same as in tprog-framework; which version it holds follows the workspace rule.
+    -->
+    <TProgDotNetVersion>net10.0</TProgDotNetVersion>
+  </PropertyGroup>
+
+</Project>
