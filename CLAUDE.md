@@ -29,15 +29,10 @@ höher, `../`) enthält `tprog-framework/` als Geschwister-Repo - siehe die übe
 `../CLAUDE.md` und `../tprog-framework/CLAUDE.md` für die Framework-Konventionen.
 
 **Bevor du ein neues Feature (ViewModel, Dialog, Service, Control) implementierst**: prüfe zuerst,
-ob eine passende Basis dafür bereits in `../tprog-framework` existiert (siehe `/check-framework`).
+ob eine passende Basis dafür bereits in `../tprog-framework` existiert (Workflow-Regel in `../CLAUDE.md`).
 Falls nicht und das Feature allgemein genug ist, ergänze es dort statt es hier zu duplizieren -
 beachte dabei aber, dass dies eine Workshop-/Beispiel-App ist: nicht jedes hier benötigte Feature
 muss zwingend generisch genug fürs Framework sein.
-
-Falls dieses Repo **nicht** im gemeinsamen Workspace-Ordner geöffnet ist, sondern einzeln, sorgt
-`.claude/settings.json` (`additionalDirectories: ["../tprog-framework"]`) dafür, dass das Framework
-trotzdem lesbar/schreibbar bleibt - vorausgesetzt, `tprog-framework` liegt als Geschwister-Ordner
-neben diesem Repo auf der Festplatte.
 
 ## Code-Stil
 
