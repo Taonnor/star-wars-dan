@@ -26,7 +26,8 @@ TProg.StarWarsDan.Test         Tests.
 
 Dieses Repo referenziert `tprog-framework` (`TProg.Framework.*`). Der Workspace-Ordner (eine Ebene
 höher, `../`) enthält `tprog-framework/` als Geschwister-Repo - siehe die übergreifende
-`../CLAUDE.md` und `../tprog-framework/CLAUDE.md` für die Framework-Konventionen.
+`../CLAUDE.md`. Die Konventionen stehen nicht hier und nicht in der `CLAUDE.md` des Frameworks,
+sondern in den Skills `tprog-csharp-coding` und `tprog-wpf-coding`.
 
 **Bevor du ein neues Feature (ViewModel, Dialog, Service, Control) implementierst**: prüfe zuerst,
 ob eine passende Basis dafür bereits in `../tprog-framework` existiert (Workflow-Regel in `../CLAUDE.md`).
