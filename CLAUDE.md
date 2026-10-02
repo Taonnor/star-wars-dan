@@ -38,6 +38,11 @@ muss zwingend generisch genug fürs Framework sein.
 
 Übernimmt die Konventionen aus `tprog-framework` (eigene `.editorconfig` vorhanden).
 
+## Bauen, Testen, CI
+
+Befehle vom Repo-Root aus, siehe README, „Bauen und Testen" — dort steht auch, was die CI
+(`.github/workflows/dotnet-desktop.yml`) zusätzlich prüft und was ein neues Testprojekt braucht.
+
 ## Ausführen ohne Visual Studio
 
 .NET Desktop Runtime 10.0 installieren, siehe README.md für Details.

@@ -25,12 +25,16 @@ gegen eine andere Quelle austauschen, ohne die übrigen Projekte anzufassen. Die
 
 ```
 dotnet restore
+dotnet format whitespace TProg.StarWarsDan.sln --verify-no-changes
 dotnet build -c Release --no-restore
 dotnet test -c Release --no-build
 ```
 
 Eine Windows-Maschine ist erforderlich, weil die Anwendung auf WPF aufsetzt. Dieselben Schritte
-laufen in der CI, je einmal in `Debug` und in `Release`.
+laufen in der CI, je einmal in `Debug` und in `Release`; die Leerraum-Prüfung läuft dabei nur in
+`Debug`. Die CI prüft zusätzlich vor dem Restore, dass jedes Testprojekt in der Solution liegt, und
+wird rot, wenn ein Testlauf null Tests ergibt. Ein neues Testprojekt braucht dafür
+`<IsTestProject>true</IsTestProject>` in seiner `.csproj`.
 
 Ein zusätzlicher Schritt für die Framework-Pakete ist nicht nötig: Sie liegen im Ordner `nuget/`
 dieses Repos, und die `NuGet.config` im Wurzelverzeichnis zeigt relativ dorthin. Das Repo lässt sich
