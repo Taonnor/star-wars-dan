@@ -25,11 +25,52 @@ jobs:
       with:
         dotnet-version: 10.0.x
 
+    # Ein Testprojekt, das nicht in der Solution liegt, laeuft stillschweigend nie mit:
+    # dotnet test findet dann null Testdateien und meldet trotzdem Erfolg. Der Schalter
+    # TreatNoTestsAsError im Testschritt greift in diesem Fall nicht, weil gar kein
+    # Testlauf stattfindet.
+    - name: Verify test projects are in the solution
+      shell: pwsh
+      run: |
+        $inSolution = dotnet sln list | Where-Object { $_ -like '*.csproj' }
+
+        $testProjects = Get-ChildItem -Recurse -Filter *.csproj |
+            Where-Object { $_.FullName -notmatch '\\(bin|obj)\\' } |
+            Where-Object { (Get-Content $_.FullName -Raw) -match '<IsTestProject>\s*true' }
+
+        if ($testProjects.Count -eq 0) {
+            Write-Output "::error::Kein Testprojekt gefunden. Ein Lauf ohne Testprojekt sichert nichts zu."
+            exit 1
+        }
+
+        $missing = @()
+        foreach ($project in $testProjects) {
+            if (-not ($inSolution | Where-Object { $_ -like "*$($project.Name)" })) {
+                $missing += (Resolve-Path -Relative $project.FullName)
+            }
+        }
+
+        if ($missing.Count -gt 0) {
+            foreach ($path in $missing) {
+                Write-Output "::error::Testprojekt liegt im Repo, fehlt aber in der Solution: $path"
+            }
+            Write-Output "::notice::$($missing.Count) Testprojekt(e) fehlen in der Solution; die Liste der Fehler kann gekuerzt sein."
+            exit 1
+        }
+
+        Write-Output "Alle Testprojekte sind in der Solution ($($testProjects.Count))."
+
     - name: Restore NuGet
       run: dotnet restore
+
+    - name: Check whitespace formatting
+      if: matrix.configuration == 'Debug'
+      run: dotnet format whitespace TProg.StarWarsDan.sln --verify-no-changes
 
     - name: Build
       run: dotnet build -c ${{ matrix.configuration }} --no-restore
 
+    # TreatNoTestsAsError faerbt den Lauf rot, wenn ein Testlauf stattfindet, dabei aber
+    # null Tests herauskommen - etwa weil ein Filter nichts trifft.
     - name: Execute unit tests
-      run: dotnet test -c ${{ matrix.configuration }} --no-build
+      run: dotnet test -c ${{ matrix.configuration }} --no-build -- RunConfiguration.TreatNoTestsAsError=true
