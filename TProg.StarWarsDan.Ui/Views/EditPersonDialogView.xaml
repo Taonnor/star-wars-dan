@@ -24,8 +24,19 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <DataTemplate x:Key="GenderTemplate">
-            <TextBlock Foreground="{StaticResource TProg.Colors.NormalBackground}" Text="{Binding}" />
+        <!--  The user reads German names; the values of the enum stay as they are  -->
+        <DataTemplate x:Key="GenderTemplate" DataType="{x:Type domain:Gender}">
+            <TextBlock x:Name="GenderText"
+                       Foreground="{StaticResource TProg.Colors.NormalBackground}"
+                       Text="{Binding}" />
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding}" Value="{x:Static domain:Gender.Female}">
+                    <Setter TargetName="GenderText" Property="Text" Value="weiblich" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding}" Value="{x:Static domain:Gender.Male}">
+                    <Setter TargetName="GenderText" Property="Text" Value="männlich" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
         </DataTemplate>
 
     </UserControl.Resources>
