@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.Composition;
 
 using TProg.Framework.Mvvm.Api;
-using TProg.Framework.Mvvm.Commands;
 using TProg.Framework.Mvvm.Api.Dialogs;
+using TProg.Framework.Mvvm.Commands;
 using TProg.StarWarsDan.Data.Api;
 using TProg.StarWarsDan.Domain;
 using TProg.StarWarsDan.Ui.Api;

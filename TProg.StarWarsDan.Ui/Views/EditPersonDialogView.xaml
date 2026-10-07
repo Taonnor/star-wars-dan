@@ -9,6 +9,7 @@
              xmlns:viewModels="clr-namespace:TProg.StarWarsDan.Ui.ViewModels"
              d:DataContext="{d:DesignInstance viewModels:EditPersonDialogViewModel,
                                               IsDesignTimeCreatable=False}"
+             Language="de-DE"
              mc:Ignorable="d">
     <UserControl.Resources>
         <d:ResourceDictionary.MergedDictionaries>

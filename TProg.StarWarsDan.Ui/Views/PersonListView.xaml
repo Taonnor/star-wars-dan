@@ -36,7 +36,7 @@
                     Orientation="Horizontal">
             <TextBlock Margin="0,0,16,0" Text="{Binding AveragePersonSizes, StringFormat=Durchschnittliche Größe: {0}}" />
             <TextBlock Margin="0,0,16,0" Text="{Binding AveragePersonBirthYears, StringFormat=Durchschnittliches Geburtsjahr: {0}}" />
-            <TextBlock Text="{Binding MaleFemaleRatio, StringFormat=Verhältnis männlich / weiblich: {0}}" />
+            <TextBlock Text="{Binding MaleFemaleRatio, StringFormat=Verhältnis weiblich / männlich: {0}}" />
         </StackPanel>
 
         <ListView Grid.Row="1"
