@@ -6,6 +6,28 @@ namespace TProg.StarWarsDan.Test.Ui;
 [TestFixture]
 public class EditPersonDialogViewModelTests
 {
+    /// <summary>
+    /// The dialog title is what the user reads above the dialog, so it is German (rule 20).
+    /// </summary>
+    [Test]
+    public void TestDialogTitle()
+    {
+        // Arrange
+        EditPersonDialogViewModel testObject = CreateEditPersonDialogViewModel();
+
+        // Act
+        string title = testObject.DialogTitle;
+
+        // Assert
+        Assert.That(title, Is.EqualTo("Person bearbeiten"));
+    }
+
+    /// <summary>
+    /// Creates the object under test.
+    /// </summary>
+    /// <returns>A new <see cref="EditPersonDialogViewModel"/>.</returns>
+    private static EditPersonDialogViewModel CreateEditPersonDialogViewModel() => new();
+
     [Test]
     public void PersonHeight_ShouldRaisePropertyChangedEvent()
     {
