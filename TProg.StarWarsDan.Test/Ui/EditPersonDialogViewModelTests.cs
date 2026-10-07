@@ -7,6 +7,19 @@ namespace TProg.StarWarsDan.Test.Ui;
 public class EditPersonDialogViewModelTests
 {
     [Test]
+    public void DialogTitle_IsGerman()
+    {
+        // Arrange
+        EditPersonDialogViewModel viewModel = new();
+
+        // Act
+        string title = viewModel.DialogTitle;
+
+        // Assert
+        Assert.That(title, Is.EqualTo("Person bearbeiten"));
+    }
+
+    [Test]
     public void PersonHeight_ShouldRaisePropertyChangedEvent()
     {
         // Arrange

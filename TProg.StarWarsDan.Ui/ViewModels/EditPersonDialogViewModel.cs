@@ -17,7 +17,7 @@ internal sealed class EditPersonDialogViewModel : DialogViewModelBase
     /// Initializes a new instance of the <see cref="EditPersonDialogViewModel"/> class.
     /// </summary>
     /// <param name="editedPerson">The person to be edited.</param>
-    public EditPersonDialogViewModel() : base("Edit selected Person")
+    public EditPersonDialogViewModel() : base("Person bearbeiten")
     {
     }
 

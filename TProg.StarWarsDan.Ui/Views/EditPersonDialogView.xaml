@@ -39,10 +39,10 @@
                     Margin="0,0,16,0"
                     Orientation="Vertical">
             <TextBlock Height="24" Text="Name" />
-            <TextBlock Height="24" Text="Height" />
-            <TextBlock Height="24" Text="Mass" />
-            <TextBlock Height="24" Text="Birth Year" />
-            <TextBlock Height="24" Text="Gender" />
+            <TextBlock Height="24" Text="Größe" />
+            <TextBlock Height="24" Text="Gewicht" />
+            <TextBlock Height="24" Text="Geburtsjahr" />
+            <TextBlock Height="24" Text="Geschlecht" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" Orientation="Vertical">
