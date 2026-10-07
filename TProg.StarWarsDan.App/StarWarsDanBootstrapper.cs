@@ -57,22 +57,22 @@ internal sealed class StarWarsDanBootstrapper : BootstrapperBase
         {
             // Show Splash Screen
             this.splashScreenService = this.GetExportedValue<ISplashScreenService>() ??
-                throw new NullReferenceException("The import of ISplashScreenService is null");
+                throw new InvalidOperationException("The import of ISplashScreenService is null");
             this.splashScreenService.ShowSplashScreen();
 
             // Initialize application resources
             // The process is performance intensive
             IApplicationResourceService? applicationResourceService = this.GetExportedValue<IApplicationResourceService>() ??
-                throw new NullReferenceException("The import of IApplicationResourceService is null");
+                throw new InvalidOperationException("The import of IApplicationResourceService is null");
             applicationResourceService.CreateApplicationResources();
 
             // From now on errors are shown in the look of the application
             this.errorReporter.UseDialogService(this.GetExportedValue<IDialogService>() ??
-                throw new NullReferenceException("The import of IDialogService is null"));
+                throw new InvalidOperationException("The import of IDialogService is null"));
 
             // Entry Point for MEF chain
             MainScreenViewModel? mainScreenViewModel = this.GetExportedValue<MainScreenViewModel>() ??
-                throw new NullReferenceException("The import of IMainScreenViewModel is null");
+                throw new InvalidOperationException("The import of IMainScreenViewModel is null");
 
             // Data context for main window
             this.mainWindowViewModel = new MainWindowContext(mainScreenViewModel, "StarWarsDan");
