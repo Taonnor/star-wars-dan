@@ -46,4 +46,4 @@ Befehle vom Repo-Root aus, siehe README, „Bauen und Testen" — dort steht auc
 
 ## Ausführen ohne Visual Studio
 
-.NET Desktop Runtime 10.0 installieren, siehe README.md für Details.
+Die .NET Desktop Runtime installieren — welche Version, steht in README.md.
