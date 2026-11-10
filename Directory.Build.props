@@ -12,7 +12,10 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- Makes the IDE rules of .editorconfig part of the build, so that they fail it as well. -->
+    <!--
+      Makes the IDE rules of .editorconfig part of the build, so that violations are reported as
+      warnings by it. Only the TPROG rules of the analyzer package below are errors.
+    -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
