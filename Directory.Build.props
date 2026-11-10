@@ -11,4 +11,21 @@
     <TProgDotNetVersion>net10.0</TProgDotNetVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!--
+      Makes the IDE rules of .editorconfig part of the build and treats every warning as an error,
+      so that a compiler warning or an IDE rule at severity warning fails the build.
+    -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Checks the code rules of the TProg Framework in every project of this repository, also those
+      without a reference to the framework (AD-28 of tprog-framework). A build-time tool only.
+    -->
+    <PackageReference Include="TProg.Framework.Analyzers" Version="1.0.0" PrivateAssets="all" />
+  </ItemGroup>
+
 </Project>

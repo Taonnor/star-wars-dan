@@ -38,6 +38,8 @@ muss zwingend generisch genug fürs Framework sein.
 ## Code-Stil
 
 Übernimmt die Konventionen aus `tprog-framework` (eigene `.editorconfig` vorhanden).
+`Directory.Build.props` setzt `EnforceCodeStyleInBuild` und `TreatWarningsAsErrors`, und das Paket
+`TProg.Framework.Analyzers` prüft im Build die Code-Regeln des Frameworks (`TPROG…`).
 
 ## Bauen, Testen, CI
 
