@@ -13,10 +13,11 @@
 
   <PropertyGroup>
     <!--
-      Makes the IDE rules of .editorconfig part of the build, so that violations are reported as
-      warnings by it. Only the TPROG rules of the analyzer package below are errors.
+      Makes the IDE rules of .editorconfig part of the build and treats every warning as an error,
+      so that a violation fails the build like in the other repositories of the workspace.
     -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
