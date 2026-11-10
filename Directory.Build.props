@@ -14,7 +14,7 @@
   <PropertyGroup>
     <!--
       Makes the IDE rules of .editorconfig part of the build and treats every warning as an error,
-      so that a violation fails the build like in the other repositories of the workspace.
+      so that a compiler warning or an IDE rule at severity warning fails the build.
     -->
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
