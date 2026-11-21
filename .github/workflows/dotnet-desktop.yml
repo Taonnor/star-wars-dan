@@ -28,10 +28,10 @@ jobs:
       with:
         dotnet-version: 10.0.x
 
-    # Ein Testprojekt, das nicht in der Solution liegt, laeuft stillschweigend nie mit:
-    # dotnet test findet dann null Testdateien und meldet trotzdem Erfolg. Der Schalter
-    # TreatNoTestsAsError im Testschritt greift in diesem Fall nicht, weil gar kein
-    # Testlauf stattfindet.
+    # A test project that is not part of the solution silently never runs: dotnet test
+    # then finds zero test files and still reports success. The TreatNoTestsAsError
+    # switch in the test step does not catch this case, because no test run happens
+    # at all.
     - name: Verify test projects are in the solution
       shell: pwsh
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Build
       run: dotnet build -c ${{ matrix.configuration }} --no-restore
 
-    # TreatNoTestsAsError faerbt den Lauf rot, wenn ein Testlauf stattfindet, dabei aber
-    # null Tests herauskommen - etwa weil ein Filter nichts trifft.
+    # TreatNoTestsAsError turns the run red when a test run happens but yields zero
+    # tests - for example because a filter matches nothing.
     - name: Execute unit tests
       run: dotnet test -c ${{ matrix.configuration }} --no-build -- RunConfiguration.TreatNoTestsAsError=true
